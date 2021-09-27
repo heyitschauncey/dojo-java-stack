@@ -75,7 +75,9 @@ class SinglyLinkedList {
    * - Space: O(?).
    * @returns {boolean}
    */
-  isEmpty() {}
+   isEmpty() {
+    return this.head === null;
+  }
 
   /**
    * Creates a new node with the given data and inserts it at the back of
@@ -85,7 +87,22 @@ class SinglyLinkedList {
    * @param {any} data The data to be added to the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtBack(data) {}
+  insertAtBack(data) {
+    let newNode = new Node(data);
+
+    if (this.isEmpty()) {
+      this.head = newNode;
+    } else {
+      let runner = this.head;
+
+      while (runner.next != null) {
+        runner = runner.next;
+      }
+      runner.next = newNode;
+    }
+
+    return this;
+  }
 
   // ========================== DAY 2 START ====================================
   /**

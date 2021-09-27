@@ -75,7 +75,9 @@ class SinglyLinkedList {
    * - Space: O(?).
    * @returns {boolean}
    */
-  isEmpty() {}
+   isEmpty() {
+    return this.head === null;
+  }
 
   /**
    * Creates a new node with the given data and inserts it at the back of
@@ -85,7 +87,22 @@ class SinglyLinkedList {
    * @param {any} data The data to be added to the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtBack(data) {}
+  insertAtBack(data) {
+    let newNode = new Node(data);
+
+    if (this.isEmpty()) {
+      this.head = newNode;
+    } else {
+      let runner = this.head;
+
+      while (runner.next != null) {
+        runner = runner.next;
+      }
+      runner.next = newNode;
+    }
+
+    return this;
+  }
 
   /**
    * Creates a new node with the given data and inserts that node at the front
@@ -155,6 +172,7 @@ class SinglyLinkedList {
    */
   recursiveMax(runner = this.head, maxNode = this.head) {}
 
+  // ========================== DAY 4 START ====================================
   /**
    * Retrieves the data of the second to last node in this list.
    * - Time: O(?).
@@ -185,40 +203,6 @@ class SinglyLinkedList {
    * @returns {boolean} To indicate whether the node was pre-pended or not.
    */
   prepend(newVal, targetVal) {}
-
-  // ========================== DAY 5 START ====================================
-  /**
-   * Concatenates the nodes of a given list onto the back of this list.
-   * - Time: O(?).
-   * - Space: O(?).
-   * @param {SinglyLinkedList} addList An instance of a different list whose
-   *    whose nodes will be added to the back of this list.
-   * @returns {SinglyLinkedList} This list with the added nodes.
-   */
-  concat(addList) {}
-
-  /**
-   * Finds the node with the smallest number as data and moves it to the front
-   * of this list.
-   * - Time: O(?).
-   * - Space: O(?).
-   * @returns {SinglyLinkedList} This list.
-   */
-  moveMinToFront() {}
-
-  // EXTRA
-  /**
-   * Splits this list into two lists where the 2nd list starts with the node
-   * that has the given value.
-   * splitOnVal(5) for the list (1=>3=>5=>2=>4) will change list to (1=>3)
-   * and the return value will be a new list containing (5=>2=>4)
-   * - Time: O(?).
-   * - Space: O(?).
-   * @param {any} val The value in the node that the list should be split on.
-   * @returns {SinglyLinkedList} The split list containing the nodes that are
-   *    no longer in this list.
-   */
-  splitOnVal(val) {}
 }
 
 const emptyList = new SinglyLinkedList();
