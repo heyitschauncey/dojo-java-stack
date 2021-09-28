@@ -75,7 +75,7 @@ class SinglyLinkedList {
    * - Space: O(?).
    * @returns {boolean}
    */
-   isEmpty() {
+  isEmpty() {
     return this.head === null;
   }
 
@@ -113,7 +113,18 @@ class SinglyLinkedList {
    * @param {any} data The data for the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtFront(data) {}
+  insertAtFront(data) {
+    if (this.isEmpty()) {
+      this.head = new Node(data);
+      return this;
+    }
+
+    let newNode = new Node(data);
+    newNode.next = this.head;
+    this.head = newNode;
+
+    return this;
+  }
 
   /**
    * Removes the first node of this list.
@@ -121,7 +132,15 @@ class SinglyLinkedList {
    * - Space: (?).
    * @returns {any} The data from the removed node.
    */
-  removeHead() {}
+  removeHead() {
+    if (this.isEmpty()) return null;
+
+    let currHead = this.head;
+    this.head = currHead;
+    currHead.next = null;
+
+    return currHead.data;
+  }
 
   // EXTRA
   /**
@@ -130,11 +149,25 @@ class SinglyLinkedList {
    * - Space: (?).
    * @returns {number|NaN} The average of the node's data.
    */
-  average() {}
+  average() {
+    if (this.isEmpty()) return null;
+
+    let sum = 0;
+    let len = 0;
+    let runner = this.head;
+
+    while (runner != null) {
+      sum += runner.data;
+      len++;
+      runner = runner.next;
+    }
+
+    return sum / len;
+  }
 }
 
 const emptyList = new SinglyLinkedList();
 const singleNodeList = new SinglyLinkedList().seedFromArr([1]);
 const unorderedList = new SinglyLinkedList().seedFromArr([
-  -5, -10, 4, -3, 6, 1, -7, 2,
+  5, 10, 4, 3, 6, 1, 7, 2,
 ]);
