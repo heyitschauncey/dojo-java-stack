@@ -212,7 +212,19 @@ class SinglyLinkedList {
    * @returns {any} The data of the second to last node or null if there is no
    *    second to last node.
    */
-  secondToLast() {}
+  secondToLast() {
+    if (this.isEmpty() || this.head.next === null) return null;
+
+    let runner1 = this.head.next;
+    let runner2 = this.head;
+
+    while (runner1.next != null) {
+      runner2 = runner1;
+      runner1 = runner1.next;
+    }
+
+    return runner2.data;
+  }
 
   /**
    * Removes the node that has the matching given val as it's data.
@@ -222,7 +234,31 @@ class SinglyLinkedList {
    *    node to be removed.
    * @returns {boolean} Indicates if a node was removed or not.
    */
-  removeVal(val) {}
+  removeVal(val) {
+    if (this.isEmpty()) return false;
+
+    if (this.head.data === val) {
+      this.removeHead();
+      return true;
+    }
+
+    let runner1 = this.head.next;
+    let runner2 = this.head;
+    let temp;
+
+    while (runner1.next !== null) {
+      if (runner1.data === val) {
+        runner2.next = runner1.next;
+        runner1.next = null;
+
+        return true;
+      }
+      runner1 = runner1.next;
+      runner2 = runner2.next;
+    }
+
+    return false;
+  }
 
   // EXTRA
   /**
@@ -234,7 +270,33 @@ class SinglyLinkedList {
    *    should be inserted in front of.
    * @returns {boolean} To indicate whether the node was pre-pended or not.
    */
-  prepend(newVal, targetVal) {}
+  prepend(newVal, targetVal) {
+    if (this.isEmpty()) return false;
+
+    let newNode = new Node(newVal);
+
+    if (this.head.data === targetVal) {
+      this.insertAtFront(newNode);
+      return true;
+    }
+
+    let runner1 = this.head.next;
+    let runner2 = this.head;
+
+    while (runner1 !== null) {
+      if (runner1.data === targetVal) {
+        newNode.next = runner1;
+        runner2.next = newNode;
+
+        return true;
+      }
+
+      runner1 = runner1.next;
+      runner2 = runner2.next;
+    }
+
+    return false;
+  }
 
   // ========================== DAY 5 START ====================================
   /**
