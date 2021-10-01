@@ -166,44 +166,81 @@ class SinglyLinkedList {
 
   /**
    * Removes the last node of this list.
-   * - Time: O(?).
-   * - Space: O(?).
+   * - Time: O(n) linear, n = length of list.
+   * - Space: O(1) constant.
    * @returns {any} The data from the node that was removed.
    */
-  removeBack() {}
+  removeBack() {
+    if (this.isEmpty()) return null;
+
+    let runner = this.head;
+
+    while (runner.next != null) {
+      runner = runner.next;
+    }
+
+    let removedNode = runner;
+    runner.next = null;
+
+    return removedNode.data;
+  }
 
   /**
    * Determines whether or not the given search value exists in this list.
-   * - Time: O(?).
-   * - Space: O(?).
+   * - Time: O(n) linear, n = length of list.
+   * - Space: O(1) constant.
    * @param {any} val The data to search for in the nodes of this list.
    * @returns {boolean}
    */
-  contains(val) {}
+  contains(val) {
+    if (this.isEmpty()) return null;
+
+    let runner = this.head;
+
+    while (runner !== null) {
+      if (runner.data === val) return true;
+      runner = runner.next;
+    }
+
+    return false;
+  }
 
   /**
    * Determines whether or not the given search value exists in this list.
-   * - Time: O(?).
-   * - Space: O(?).
+   * - Time: O(n) linear, n = length of list.
+   * - Space: O(1) constant.
    * @param {any} val The data to search for in the nodes of this list.
    * @param {?node} current The current node during the traversal of this list
    *    or null when the end of the list has been reached.
    * @returns {boolean}
    */
-  containsRecursive(val, current = this.head) {}
+  containsRecursive(val, current = this.head) {
+    if (current === null) return false;
 
-  // EXTRA
+    if (current.data === val) return true;
+
+    return this.containsRecursive(val, current.next);
+  }
+
   /**
    * Recursively finds the maximum integer data of the nodes in this list.
-   * - Time: O(?).
-   * - Space: O(?).
+   * Time: O(n) linear, n = list length. Max could be at end.
+   * Space: O(1) constant.
    * @param {Node} runner The start or current node during traversal, or null
    *    when the end of the list is reached.
    * @param {Node} maxNode Keeps track of the node that contains the current
    *    max integer as it's data.
    * @returns {?number} The max int or null if none.
    */
-  recursiveMax(runner = this.head, maxNode = this.head) {}
+  recursiveMax(runner = this.head, maxNode = this.head) {
+    if (this.head === null) return null;
+
+    if (runner === null) return maxNode.data;
+
+    if (runner.data > maxNode.data) maxNode = runner;
+
+    return this.recursiveMax(runner.next, maxNode);
+  }
 
   // ========================== DAY 4 START ====================================
   /**
@@ -243,3 +280,4 @@ const singleNodeList = new SinglyLinkedList().seedFromArr([1]);
 const unorderedList = new SinglyLinkedList().seedFromArr([
   -5, -10, 4, -3, 6, 1, -7, 2,
 ]);
+const anotherList = new SinglyLinkedList().seedFromArr([4, 7, 2, 10, 15, 7, 25, 3, 1, 8, 28, 9, 6]);
