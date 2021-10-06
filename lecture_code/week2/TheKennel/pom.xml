@@ -8,12 +8,12 @@
 		<version>2.5.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.saconverse.session</groupId>
-	<artifactId>SessionProject</artifactId>
+	<groupId>com.saconverse.kennel</groupId>
+	<artifactId>TheKennel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>SessionProject</name>
-	<description>hot dog</description>
+	<name>TheKennel</name>
+	<description>Good boys and girls</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

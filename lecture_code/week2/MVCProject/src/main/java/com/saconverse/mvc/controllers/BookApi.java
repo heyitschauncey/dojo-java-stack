@@ -28,7 +28,7 @@ public class BookApi {
 //		return bServ.getAll();
 	}
 	
-	@PostMapping("/api/books/create")
+	@PostMapping("api/books/create")
 	public Book createBook(
 		@RequestParam("title") String title,
 		@RequestParam("description") String description,
