@@ -131,7 +131,7 @@ class SLQueue {
    * this.size tracks the size. we need to make sure we increment or decrement
    * this.size when we enqueue or dequeue
    */
-   constructor() {
+  constructor() {
     this.head = null;
     this.tail = null;
     this.size = 0;
@@ -142,7 +142,7 @@ class SLQueue {
    * @returns {boolean} is the queue empty true/false
    */
   isEmpty() {
-    return this.head !== null;
+    return this.head === null;
   }
 
   /**
@@ -159,11 +159,11 @@ class SLQueue {
    */
   enqueue(newNode) {
     if (this.isEmpty()) {
-      this.head = newTail;
-      this.tail = newTail;
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      this.tail.next = newTail;
-      this.tail = newTail;
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
     // pre-increment so the new size is returned otherwise old size is returned
     return ++this.size;
@@ -257,7 +257,7 @@ class SLQueue {
    * @returns {boolean} Whether all the items of the two queues are equal and
    *    in the same order.
    */
-   compareQueues(q2) {
+  compareQueues(q2) {
     if (this.size !== e2.size()) return false;
 
     let isEqual = true;
@@ -304,14 +304,14 @@ class SLQueue {
     // using a stack means that we can then retrieve the nodes in reverse order
     for (let i = 0; i < len; i++) {
       let dequeued = this.dequeue();
-      stack.pushNode(dequeued);
+      stack.push(dequeued);
 
       this.enqueue(dequeued);
     }
 
     for (let i = 0; i < len; i++) {
       let dequeued = this.dequeue();
-      let popped = stack.popNode();
+      let popped = stack.pop();
 
       if (popped.data !== dequeued.data) {
         isPalin = false;
@@ -333,7 +333,37 @@ class SLQueue {
    * - Space: O(?).
    * @returns {boolean} Whether the sum of the left and right halves is equal.
    */
-  isSumOfHalvesEqual() {}
+  isSumOfHalvesEqual2() {
+    let len = this.size;
+    let sum1 = 0;
+    let sum2 = 0;
+    let skip = false;
+    if (len % 2 != 0) {
+      skip = true;
+    }
+
+    for (let i = 0; i < len; i++) {
+      let currentNode = this.dequeue();
+      if (skip) {
+        if (i < Math.floor(len / 2)) {
+          sum1 += currentNode.data;
+        }
+        if (i > Math.floor(len / 2)) {
+          sum2 += currentNode.data;
+        }
+        this.enqueue(currentNode);
+      } else {
+        if (i < len / 2) {
+          sum1 += currentNode.data;
+        } else {
+          sum2 += currentNode.data;
+        }
+        this.enqueue(currentNode);
+      }
+    }
+    console.log(sum1, sum2);
+    return sum1 == sum2;
+  }
 }
 
 /**
@@ -351,11 +381,11 @@ class TwoStackQueue {
    * Takes a node and adds it to the top of the queue
    * @param {Node} newNode the new node that is to be pushed to the back of the queue
    */
-   enqueue(newNode) {}
+  enqueue(newNode) {}
 
-   /**
-    * Removes the Node at the front of the queue and returns it
-    * @returns {Node} the node that was removed
-    */
-   dequeue() {}
+  /**
+   * Removes the Node at the front of the queue and returns it
+   * @returns {Node} the node that was removed
+   */
+  dequeue() {}
 }
