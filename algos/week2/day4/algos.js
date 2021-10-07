@@ -131,7 +131,7 @@ class SLQueue {
    * this.size tracks the size. we need to make sure we increment or decrement
    * this.size when we enqueue or dequeue
    */
-  constructor() {
+   constructor() {
     this.head = null;
     this.tail = null;
     this.size = 0;
@@ -149,45 +149,91 @@ class SLQueue {
    * Returns the size of the queue
    * @returns {number} the size of the queue
    */
-  size() {}
+  size() {
+    return this.size;
+  }
 
   /**
    * Takes a node and adds it to the top of the queue
    * @param {Node} newNode the new node that is to be pushed to the back of the queue
    */
-  enqueue(newNode) {}
+  enqueue(newNode) {
+    if (this.isEmpty()) {
+      this.head = newTail;
+      this.tail = newTail;
+    } else {
+      this.tail.next = newTail;
+      this.tail = newTail;
+    }
+    // pre-increment so the new size is returned otherwise old size is returned
+    return ++this.size;
+  }
 
   /**
    * Removes the Node at the front of the queue and returns it
    * @returns {Node} the node that was removed
    */
-  dequeue() {}
+  dequeue() {
+    if (!this.head) {
+      return null;
+    }
+
+    const dequeued = this.head;
+    this.head = this.head.next;
+
+    if (this.head === null) {
+      this.tail = null;
+    }
+
+    this.size--;
+    return dequeued;
+  }
 
   /**
-   * Returns the node at the front of the queue without removing
+   * Returns the node at the top of the queue without removing
    * @returns {Node} the node at the top of the queue
    */
-  front() {}
+  front() {
+    return this.head ? this.head : null;
+  }
 
   // EXTRA
   /**
    * Goes through the queue to see if it contains the value.
-   * Bonus: follow the concept of a queue and only use enqueue and dequeue.
+   * Bonus: follow the concept of a queue and only use pop and push.
    * By the end of the function, the queue should be in the original order it started in.
    * It is only to use another queue.
    * @param {any} value a value to search for in the queue
    * @returns {boolean} true/false whether the value is in the queue
    */
-  contains(value) {}
+  contains(value) {
+    let runner = this.head;
+
+    while (runner) {
+      if (runner.searchVal === searchVal) return true;
+      runner = runner.next;
+    }
+    return false;
+  }
 
   // EXTRA
   /**
    * Goes through the queue to print out all the values
-   * Bonus: follow the concept of a queue and only use enqueue and dequeue.
+   * Bonus: follow the concept of a queue and only use pop and push.
    * By the end of the function, the queue should be in the original order it started in.
    * It is only to use another queue.
    */
-  print() {}
+  print() {
+    let runner = this.head;
+    let vals = "";
+
+    while (runner) {
+      vals += `${runner.data}${runner.next ? ", " : ""}`;
+      runner = runner.next;
+    }
+    console.log(vals);
+    return vals;
+  }
 
   /**
    * Enqueues each of the given items.
@@ -211,7 +257,31 @@ class SLQueue {
    * @returns {boolean} Whether all the items of the two queues are equal and
    *    in the same order.
    */
-  compareQueues(q2) {}
+   compareQueues(q2) {
+    if (this.size !== e2.size()) return false;
+
+    let isEqual = true;
+    let len = this.size();
+
+    // the main this with this algo is that, with a queue implementation, the only way
+    // we can access the nodes in the queue is to dequeue the nodes one at a time.
+    // to preserve the original queue order, we therefore enqueue the dequeued node after the comparison
+    for (let i = 0; i < len; i++) {
+      const dequeued1 = this.dequeue();
+      const dequeued2 = q2.dequeue();
+
+      // we set isEqual to false instead of an early exit so that we can finish
+      // setting the queues back to the original order
+      if (dequeued1.data !== dequeued2.data) {
+        isEqual = false;
+      }
+
+      this.enqueue(dequeued1);
+      q2.enqueue(dequeued2);
+    }
+
+    return isEqual;
+  }
 
   /**
    * Determines if the queue is a palindrome (same items forward and backwards).
@@ -223,5 +293,69 @@ class SLQueue {
    * - Space: O(?).
    * @returns {boolean}
    */
-  isPalindrome() {}
+  isPalindrome() {
+    if (this.isEmpty()) return false;
+
+    let isPalin = true;
+    const stack = new Stack();
+    const len = this.size();
+
+    // again, need to dequeue and enqueue to access everything and preserve the original order
+    // using a stack means that we can then retrieve the nodes in reverse order
+    for (let i = 0; i < len; i++) {
+      let dequeued = this.dequeue();
+      stack.pushNode(dequeued);
+
+      this.enqueue(dequeued);
+    }
+
+    for (let i = 0; i < len; i++) {
+      let dequeued = this.dequeue();
+      let popped = stack.popNode();
+
+      if (popped.data !== dequeued.data) {
+        isPalin = false;
+      }
+
+      this.enqueue(dequeued);
+    }
+
+    return isPalin;
+  }
+
+  /**
+   * Determines whether the sum of the left half of the queue items is equal to
+   * the sum of the right half. Avoid indexing the queue items directly via
+   * bracket notation, use the queue methods instead for practice.
+   * Use no extra array or objects.
+   * The queue should be returned to it's original order when done.
+   * - Time: O(?).
+   * - Space: O(?).
+   * @returns {boolean} Whether the sum of the left and right halves is equal.
+   */
+  isSumOfHalvesEqual() {}
+}
+
+/**
+ * Class to represent a Queue but is implemented using two stacks to store the
+ * queued items without using any other objects or arrays to store the items.
+ * Retains the FIFO (First in First Out) ordering when adding / removing items.
+ */
+class TwoStackQueue {
+  constructor() {
+    this.stack1 = new Stack();
+    this.stack2 = new Stack();
+  }
+
+  /**
+   * Takes a node and adds it to the top of the queue
+   * @param {Node} newNode the new node that is to be pushed to the back of the queue
+   */
+   enqueue(newNode) {}
+
+   /**
+    * Removes the Node at the front of the queue and returns it
+    * @returns {Node} the node that was removed
+    */
+   dequeue() {}
 }
