@@ -35,6 +35,7 @@
 			<ul>
 				<c:forEach items="${ dog.collars }" var="collar">
 					<li><c:out value="${ collar.color }" /></li>
+					<%-- <li>${ collar.color }</li> --%>
 				</c:forEach>
 			</ul>
 			<h3>The number of collars this dog owns is: <c:out value="${ dog.collars.size() }" /></h3>
