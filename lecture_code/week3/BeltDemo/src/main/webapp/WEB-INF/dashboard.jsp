@@ -37,18 +37,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${ loggedInUser.pokemon }" var="pokemon">
+					<c:forEach items="${ allPokemon }" var="pokemon">
 						<tr>
 							<td><c:out value="${ pokemon.name }" /></td>
 							<td><c:out value="${ pokemon.type }" /></td>
 							<td><c:out value="${ pokemon.level }" /></td>
 							<td class="d-flex justify-content-around">
 								<a class="btn btn-link" href="/pokemon/${ pokemon.id }">View</a>
-								<a class="btn btn-link" href="/pokemon/${ pokemon.id }/edit">Edit</a>
-								<form action="/pokemon/${ pokemon.id }/delete" method="post">
-									<input type="hidden" name="_method" value="delete"/>
-									<button class="btn btn-link">Delete</button>
-								</form>
+								<c:if test="${ loggedInUser.id == pokemon.creator.id }">
+									<a class="btn btn-link" href="/pokemon/${ pokemon.id }/edit">Edit</a>
+									<form action="/pokemon/${ pokemon.id }/delete" method="post">
+										<input type="hidden" name="_method" value="delete"/>
+										<button class="btn btn-link">Delete</button>
+									</form>
+								</c:if>
 							</td>
 						</tr>
 					</c:forEach>
