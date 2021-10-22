@@ -1,5 +1,5 @@
 class TrieNode {
-  constructor(char = null) {
+  constructor(char = "") {
     // each node stores its own character value
     this.character = char;
 
@@ -16,59 +16,89 @@ class TrieNode {
 class Trie {
   constructor() {
     // root node represents an empty string
-    this.root = new TrieNode("");
+    this.root = new TrieNode();
   }
 
   /**
    * Adds the given to the Trie.
    * @param {string} word Word that is being added to the Trie
-   * @returns {boolean} true/false status of adding the word
+   * @returns {Trie} the current object of the Trie class
    */
-  add(word) {}
+  add(word) {
+    let node = this.root; // runner / current
+
+    for (const character of word) {
+      if (!node.children.hasOwnProperty(character)) {
+        node.children[character] = new TrieNode(character);
+      }
+
+      node = node.children[character];
+    }
+
+    node.isEndOfWord = true;
+
+    return this
+  }
 
   /**
-   * Searches for a Complete word in the Trie.
-   * This algo does not check for substrings.
-   * @param {string} word Word to search for in the Trie
-   * @returns {boolean} true/false was the word found
+   * Returns an array with any complete words beginning
+   * with the given starting substring.
+   * - Time: O(?)
+   * - Space: O(?)
+   * @returns {array} of strings
    */
-  contains(word) {}
+  autoComplete(startingSubstring) {
+    // TIP: separating logic into separate helper functions may help figuring this out and help code readability
+    let startNode = this.getLastOfSubstring(startingSubstring);
 
-  /**
-   * Recursively print the characters in the Trie
-   * @param {TrieNode} node  The current node.
-   */
-  printAllKeys() {}
+    return this.getCompletions(startingSubtring, "", startNode);
+  }
 
-  /**
-   * Recursively find the number of characters in the Trie
-   * Note: the empty string at the root counts as size = 0
-   * @param {TrieNode} node the current node
-   * @param {int} size the size of the Trie
-   * @returns {int} the size of the Trie
-   */
-  size(node = this.root, size = 0) {}
+  // Finds the last character node of the given substring
+  getLastOfSubstring(substring) {
+    let runner = this.root;
+
+    for (const character of substring) {
+      if (runner.children.hasOwnProperty(character)) {
+        runner = runner.children[character];
+      }
+    }
+
+    return runner;
+  }
+
+  // Recursive call to get the word completions
+  getCompletions(prepend = "", branchString = "", node = this.root, completions = []) {
+    if (node.isEndOfWord) {
+      completions.push(prepend + branchString);
+    }
+
+    // BASE CASE
+    // this prevents the function from running infinitely
+    if (!node.children) {
+      return completions;
+    }
+
+    // looping through the keys of a given node's .children
+    for (const character in node.children) {
+      this.getCompletions(prepend, branchString + node.children[character].character, node.children[character], completions);
+    }
+
+    return completions;
+  }
 }
 
-var words = [
-  "the",
-  "a",
-  "there",
-  "answer",
-  "any",
-  "by",
-  "bye",
-  "their",
-  "out",
-  "outside",
-  "quest",
-];
+let searchHistory = new Trie();
+searchHistory
+  .add("cat")
+  .add("can")
+  .add("candy")
+  .add("crud")
+  .add("apple")
+  .add("a")
+  .add("an")
+  .add("and");
+console.log(searchHistory);
 
-var words = ["always", "dog"];
-
-const trie = new Trie();
-for (const w of words) {
-  trie.add(w);
-}
-
-console.log(trie.size());
+console.log(searchHistory.autoComplete("a"));
+console.log(searchHistory.autoComplete("ca")); // ["cat", "can", "candy"]
