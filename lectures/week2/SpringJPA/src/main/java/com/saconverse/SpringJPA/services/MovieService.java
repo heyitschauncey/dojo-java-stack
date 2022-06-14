@@ -22,6 +22,10 @@ public class MovieService {
 		return movieRepo.save(m);
 	}
 	
+	public Movie createMovie(String title, String genre, Integer rating) {
+		return movieRepo.save(new Movie(title, genre, rating));
+	}
+	
 	// READ
 	
 	public List<Movie> findAll() {
