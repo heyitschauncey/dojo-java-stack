@@ -8,11 +8,11 @@
 		<version>2.7.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.saconverse.SpringJPA</groupId>
-	<artifactId>SpringJPA</artifactId>
+	<groupId>com.saconverse.FullCrud</groupId>
+	<artifactId>FullCrud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>SpringJPA</name>
+	<name>FullCrud</name>
 	<description>Spring JPA Lecture</description>
 	<properties>
 		<java.version>1.8</java.version>
