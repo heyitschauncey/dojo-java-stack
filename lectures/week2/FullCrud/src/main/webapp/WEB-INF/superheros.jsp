@@ -29,15 +29,23 @@
    			<th>Name</th>
    			<th>Super Power</th>
    			<th>Weakness</th>
+   			<th>Actions</th>
    		</tr>
    	</thead>
    	<tbody>
    		<c:forEach  var="superHero" items="${ superHeros }">
    			<tr>
    				<td><c:out value="${ superHero.getId() }" /></td>
-   				<td><c:out value="${ superHero.getName() }" /></td>
+   				<td><a href="/superheros/${ superHero.id }"><c:out value="${ superHero.getName() }" /></a></td>
    				<td><c:out value="${ superHero.getSuperPower() }" /></td>
    				<td><c:out value="${ superHero.getWeakness() }" /></td>
+   				<td>
+   					<a href="/superheros/${ superHero.id }/edit">Edit this Hero</a>
+   					<form action="/superheros/${ superHero.id }/delete" method="post">
+					    <input type="hidden" name="_method" value="delete">
+					    <input class="btn btn-danger" type="submit" value="Delete">
+					</form>
+   				</td>
    			</tr>
    		</c:forEach>
    	</tbody>
