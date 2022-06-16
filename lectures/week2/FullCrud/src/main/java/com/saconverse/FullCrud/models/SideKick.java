@@ -1,24 +1,23 @@
 package com.saconverse.FullCrud.models;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "superheros")
-public class SuperHero {
+@Table(name = "sidekicks")
+public class SideKick {
 	// ========== Primary Key ===================
 
     @Id
@@ -35,27 +34,22 @@ public class SuperHero {
     
     @Size(min = 2, message = "Weakness must be at least 2 characters.")
     private String weakness;
-    
-    // ========== Relationships =================
-    
-    @OneToMany(mappedBy = "superHero", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SideKick> sideKicks;
 
     // ========== Data Creation Trackers ========
 
     @Column(updatable = false)
 	private Date createdAt;
 	private Date updatedAt;
-	
+
+    // ========== Relationships =================
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "superhero_id")
+	private SuperHero superHero;
+
     // ========== Constructors ===================
 
-	public SuperHero() {}
-	
-//	public SuperHero(String name, String superPower, String weakness) {
-//		this.name = name;
-//		this.superPower = superPower;
-//		this.weakness = weakness;
-//	}
+	public SideKick() {}
 
     // ========== Data Creation Event ===========
 
@@ -69,7 +63,7 @@ public class SuperHero {
 		this.updatedAt = new Date();
 	}
 	
-    // ========== Getters and Setters ===========
+	// ========== Getters and Setters ===========
 
 	public Long getId() {
 		return id;
@@ -119,12 +113,12 @@ public class SuperHero {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<SideKick> getSideKicks() {
-		return sideKicks;
+	public SuperHero getSuperHero() {
+		return superHero;
 	}
 
-	public void setSideKicks(List<SideKick> sideKicks) {
-		this.sideKicks = sideKicks;
+	public void setSuperHero(SuperHero superHero) {
+		this.superHero = superHero;
 	}
 	
 }

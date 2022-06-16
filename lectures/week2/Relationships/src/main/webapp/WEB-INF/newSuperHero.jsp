@@ -21,20 +21,25 @@
     <title></title>
 </head>
 <body>
-   <h1>Information on <c:out value="${ superHero.name }" /></h1>
-   <p>Super Power: <c:out value="${ superHero.superPower }" /></p>
-   <p>Weakness: <c:out value="${ superHero.weakness }" /></p>
-   <h3>Side Kicks:</h3>
-   <ul>
-   	<c:forEach var="sideKick" items="${ superHero.sideKicks }">
-   		<li><c:out value="${ sideKick.name }" /></li>
-   	</c:forEach>
-   </ul>
+   <h1>Create a Super Hero</h1>
+   <form:form action="/superheros/create" method="post" modelAttribute="superHero">
+   	<p>
+   		<form:label path="name">Name:</form:label>
+   		<form:input  path="name" />
+   		<form:errors class="text-danger" path="name" />
+   	</p>
+   	<p>
+   		<form:label path="superPower">Super Power:</form:label>
+   		<form:input path="superPower" />
+   		<form:errors class="text-danger" path="superPower" />
+   	</p>
+   	<p>
+   		<form:label path="weakness">Weakness</form:label>
+   		<form:input path="weakness" />
+   		<form:errors class="text-danger" path="weakness" />
+   	</p>
+   	<button class="btn btn-outline-primary">Create</button>
+   </form:form>
    <a href="/superheros">Dashboard</a>
-   <a href="/superheros/${ superHero.id }/edit">Edit this Hero</a>
-   <form action="/superheros/${ superHero.id }/delete" method="post">
-	    <input type="hidden" name="_method" value="delete">
-	    <button class="btn btn-danger">Delete</button>
-	</form>
 </body>
 </html>

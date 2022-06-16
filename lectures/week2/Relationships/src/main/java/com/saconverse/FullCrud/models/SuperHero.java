@@ -1,16 +1,12 @@
 package com.saconverse.FullCrud.models;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -35,11 +31,6 @@ public class SuperHero {
     
     @Size(min = 2, message = "Weakness must be at least 2 characters.")
     private String weakness;
-    
-    // ========== Relationships =================
-    
-    @OneToMany(mappedBy = "superHero", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SideKick> sideKicks;
 
     // ========== Data Creation Trackers ========
 
@@ -118,13 +109,4 @@ public class SuperHero {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-	public List<SideKick> getSideKicks() {
-		return sideKicks;
-	}
-
-	public void setSideKicks(List<SideKick> sideKicks) {
-		this.sideKicks = sideKicks;
-	}
-	
 }

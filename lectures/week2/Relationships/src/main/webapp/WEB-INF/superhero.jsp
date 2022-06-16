@@ -24,12 +24,6 @@
    <h1>Information on <c:out value="${ superHero.name }" /></h1>
    <p>Super Power: <c:out value="${ superHero.superPower }" /></p>
    <p>Weakness: <c:out value="${ superHero.weakness }" /></p>
-   <h3>Side Kicks:</h3>
-   <ul>
-   	<c:forEach var="sideKick" items="${ superHero.sideKicks }">
-   		<li><c:out value="${ sideKick.name }" /></li>
-   	</c:forEach>
-   </ul>
    <a href="/superheros">Dashboard</a>
    <a href="/superheros/${ superHero.id }/edit">Edit this Hero</a>
    <form action="/superheros/${ superHero.id }/delete" method="post">

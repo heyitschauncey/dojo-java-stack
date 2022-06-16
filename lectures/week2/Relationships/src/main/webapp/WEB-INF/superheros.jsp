@@ -52,6 +52,5 @@
    </table>
    
    <a href="/superheros/new">Create A New Super Hero</a>
-   <a href="/sidekicks/new">Create a New Side Kick</a>
 </body>
 </html>
