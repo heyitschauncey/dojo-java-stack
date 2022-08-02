@@ -33,7 +33,6 @@ public class Dog {
     }
 
     // METHODS
-
     public void bark() {
         System.out.println("Bark bark my name is " + this.name);
     }
