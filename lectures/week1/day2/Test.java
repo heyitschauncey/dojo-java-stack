@@ -10,6 +10,7 @@ public class Test {
         Dog dog4 = new Dog("Bosco");
 
         // dog1.name = "Vicky";
+        
         System.out.println(dog1.getName());
         System.out.println(dog1.getAge());
         System.out.println(dog1.getHairColor());
