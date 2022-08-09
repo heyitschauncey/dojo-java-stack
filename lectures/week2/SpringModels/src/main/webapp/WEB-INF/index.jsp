@@ -21,6 +21,41 @@
     <title></title>
 </head>
 <body>
-   <h1>Hello</h1>
+	<h1>Welcome to the Dog Emporium!</h1>
+	
+	<h2>Here are the dogs that are available:</h2>
+	<table class="table table-striped">
+		<thead class="table-dark">
+			<tr scope="row">
+				<th>Id</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Hair Color</th>
+				<th>Created At</th>
+				<th>Update At</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="dog" items="${ dogs }">
+				<tr scope="row">
+					<td><c:out value="${ dog.id }" /></td>
+					<td><c:out value="${ dog.name }" /></td>
+					<td><c:out value="${ dog.age }" /></td>
+					<td><c:out value="${ dog.hairColor }" /></td>
+					<td><fmt:formatDate type="date"  value="${ dog.createdAt }" /></td>
+					<td>
+						<c:choose>
+							<c:when test="${ dog.updatedAt != null }">
+								<fmt:formatDate type="date"  value="${ dog.updatedAt }" />
+							</c:when>
+							<c:otherwise>
+								Dog has not be updated
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>
