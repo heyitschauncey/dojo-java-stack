@@ -223,7 +223,7 @@ class BinarySearchTree {
    * @param {number} newVal The data to be added to a new node.
    * @returns {BinarySearchTree} This tree.
    */
-   insert(newVal) {
+  insert(newVal) {
     const node = new BSTNode(newVal);
 
     if (this.isEmpty()) {
@@ -264,25 +264,50 @@ class BinarySearchTree {
    *    the tree is being traversed.
    * @returns {BinarySearchTree} This tree.
    */
-  insertRecursive(newVal, curr = this.root) {
+  // insertRecursive(newVal, curr = this.root) {
+  //   if (this.isEmpty()) {
+  //     this.root = new BSTNode(newVal);
+  //     return this;
+  //   }
+
+  //   if (newVal > curr.data) {
+  //     if (curr.right === null) {
+  //       curr.right = new BSTNode(newVal);
+  //       return this;
+  //     }
+  //     return this.insertRecursive(newVal, curr.right);
+  //   }
+
+  //   if (curr.left === null) {
+  //     curr.left = new BSTNode(newVal);
+  //     return this;
+  //   }
+  //   return this.insertRecursive(newVal, curr.left);
+  // }
+
+  insertRecursive(newVal, current = this.root) {
     if (this.isEmpty()) {
       this.root = new BSTNode(newVal);
       return this;
     }
 
-    if (newVal > curr.data) {
-      if (curr.right === null) {
-        curr.right = new BSTNode(newVal);
-        return this;
-      }
-      return this.insertRecursive(newVal, curr.right);
-    }
-
-    if (curr.left === null) {
-      curr.left = new BSTNode(newVal);
+    if (current.data == newVal) {
       return this;
     }
-    return this.insertRecursive(newVal, curr.left);
+
+    if (newVal < current.data && current.left == null) {
+      current.left = new BSTNode(newVal);
+      return this;
+    } else if (newVal > current.data && current.right == null) {
+      current.right = new BSTNode(newVal);
+      return this;
+    }
+
+    if (newVal < current.data) {
+      return this.insertRecursive(newVal, current.left);
+    } else if (newVal > current.data) {
+      return this.insertRecursive(newVal, current.right);
+    }
   }
 }
 
@@ -328,20 +353,22 @@ threeLevelTree.root.right.left = new BSTNode(13);
     4    12  18  24  31  44 66  90
 */
 /***************** Uncomment after insert method is created. ****************/
-// const fullTree = new BinarySearchTree();
-// fullTree
-//   .insert(25)
-//   .insert(15)
-//   .insert(10)
-//   .insert(22)
-//   .insert(4)
-//   .insert(12)
-//   .insert(18)
-//   .insert(24)
-//   .insert(50)
-//   .insert(35)
-//   .insert(70)
-//   .insert(31)
-//   .insert(44)
-//   .insert(66)
-//   .insert(90);
+const fullTree = new BinarySearchTree();
+fullTree
+  .insertRecursive(25)
+  .insertRecursive(15)
+  .insertRecursive(10)
+  .insertRecursive(5);
+// .insertRecursive(4)
+// .insertRecursive(12)
+// .insertRecursive(18)
+// .insertRecursive(24)
+// .insertRecursive(50)
+// .insertRecursive(35)
+// .insertRecursive(70)
+// .insertRecursive(31)
+// .insertRecursive(44)
+// .insertRecursive(66)
+// .insertRecursive(90);
+
+fullTree.print();

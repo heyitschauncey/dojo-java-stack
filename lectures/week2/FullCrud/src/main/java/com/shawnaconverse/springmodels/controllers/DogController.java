@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.shawnaconverse.springmodels.models.Dog;
 import com.shawnaconverse.springmodels.services.DogService;
@@ -33,6 +36,18 @@ public class DogController {
 	// all routes, in general, take  certain structure
 	// /<table_name>/action
 	// /api/<table_name>/action
+	
+	// FULL CRUD example routes
+//	/dogs
+//	/dogs/new
+//	/dogs/create
+//	/dogs/{id}
+//	/dogs/{id}/edit
+//	/dogs/{id}/update
+//	/dogs/{id}/delete
+	
+	
+	
 	@GetMapping("/")
 	public String index() {
 		return "redirect:/dogs";
@@ -55,9 +70,26 @@ public class DogController {
 		// if we were using Model model, the equivalent code would be
 		// model.addAttribute("newDog", new Dog());
 		
-		
 		return "newDog.jsp";
 	}
+	
+	@GetMapping("/dogs/{id}")
+	public String oneDog(@PathVariable("id") Long id, Model model) {
+//		Dog thisDog = dogServ.getOne(id);
+//		model.addAttribute("dog", thisDog);
+		
+		model.addAttribute("dog", dogServ.getOne(id));
+		
+		return "oneDog.jsp";
+	}
+	
+	@GetMapping("/dogs/{id}/edit")
+	public String editDog(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("dog", dogServ.getOne(id));
+		
+		return "editDog.jsp";
+	}
+	
 	
 	// ========== Action ========================
 	
@@ -73,6 +105,26 @@ public class DogController {
 		return "redirect:/dogs";
 	}
 	
+	@PutMapping("/dogs/{id}/update")
+	public String updateDog(@Valid @ModelAttribute("dog") Dog dog, BindingResult result, @PathVariable("id") Long dogId) {
+		if (result.hasErrors()) {
+			return "editDog.jsp";
+		}
+		System.out.println("The dog id in the model attribute is:" + dog.getId());
+		
+//		dog.setId(dogId);
+		dogServ.save(dog);
+		
+//		return "redirect:/dogs/" + id;
+		return String.format("redirect:/dogs/%d", dogId);
+	}
+	
+	@DeleteMapping("/dogs/{id}/delete")
+	public String deleteDog(@PathVariable("id") Long id) {
+		dogServ.delete(id);
+		
+		return "redirect:/dogs";
+	}
 	
 }
 

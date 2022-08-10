@@ -33,6 +33,7 @@
 				<th>Hair Color</th>
 				<th>Created At</th>
 				<th>Update At</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -52,6 +53,14 @@
 								Dog has not be updated
 							</c:otherwise>
 						</c:choose>
+					</td>
+					<td>
+						 <a href="/dogs/${ dog.id }" class="btn btn-primary">View</a>
+						 <a href="/dogs/${ dog.id }/edit" class="btn btn-warning">Update</a>
+						 <form action="/dogs/${ dog.id }/delete" method="post">
+						    <input type="hidden" name="_method" value="delete">
+						    <input type="submit" value="Delete" class="btn btn-danger">
+						</form>
 					</td>
 				</tr>
 			</c:forEach>
