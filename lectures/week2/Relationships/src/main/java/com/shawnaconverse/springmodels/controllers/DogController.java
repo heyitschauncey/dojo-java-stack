@@ -61,7 +61,7 @@ public class DogController {
 		
 		model.addAttribute("dogs", listOfDogs);
 		
-		return "index.jsp";
+		return "dogs/index.jsp";
 	}
 	
 	@GetMapping("/dogs/new")
@@ -70,7 +70,7 @@ public class DogController {
 		// if we were using Model model, the equivalent code would be
 		// model.addAttribute("newDog", new Dog());
 		
-		return "newDog.jsp";
+		return "dogs/newDog.jsp";
 	}
 	
 	@GetMapping("/dogs/{id}")
@@ -80,14 +80,14 @@ public class DogController {
 		
 		model.addAttribute("dog", dogServ.getOne(id));
 		
-		return "oneDog.jsp";
+		return "dogs/oneDog.jsp";
 	}
 	
 	@GetMapping("/dogs/{id}/edit")
 	public String editDog(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("dog", dogServ.getOne(id));
 		
-		return "editDog.jsp";
+		return "dogs/editDog.jsp";
 	}
 	
 	

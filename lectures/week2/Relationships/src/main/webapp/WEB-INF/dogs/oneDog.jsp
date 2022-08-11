@@ -31,5 +31,11 @@
 	    <input type="hidden" name="_method" value="delete">
 	    <input type="submit" value="Delete" class="btn btn-danger">
 	</form>
+	<h2>Here are this dog's toys:</h2>
+	<ul>
+		<c:forEach var="srambledEggs" items="${ dog.toys }">
+			<li><c:out value="${ srambledEggs.name }" /></li>
+		</c:forEach>
+	</ul>
 </body>
 </html>

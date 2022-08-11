@@ -67,5 +67,6 @@
 		</tbody>
 	</table>
 	<a href="/dogs/new" class="btn btn-success">Create a new Dog!</a>
+	<a href="/toys" class="btn btn-outline-primary">Go To the Toys Page</a>
 </body>
 </html>
