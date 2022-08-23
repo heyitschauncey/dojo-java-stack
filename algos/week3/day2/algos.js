@@ -23,6 +23,47 @@ class MinHeap {
   }
 
   /**
+   * @param {number} i
+   */
+  idxOfParent(i) {
+    return Math.floor(i / 2);
+  }
+
+  /**
+   * @param {number} i
+   */
+  idxOfLeftChild(i) {
+    return i * 2;
+  }
+
+  /**
+   * @param {number} i
+   */
+  idxOfRightChild(i) {
+    return i * 2 + 1;
+  }
+
+  /**
+   * Swaps two nodes.
+   * @param {number} i
+   * @param {number} j
+   */
+  swap(i, j) {
+    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+  }
+
+  /**
+   * Retrieves the size of the heap, ignoring the null placeholder.
+   * - Time: O(1) constant.
+   * - Space: O(1) constant.
+   * @returns {number}
+   */
+  size() {
+    // - 1 since 0 index is unused
+    return this.heap.length - 1;
+  }
+
+  /**
    * Retrieves the top (minimum number) in the heap without removing it.
    * - Time: O(1) constant.
    * - Space: O(1) constant.
@@ -161,5 +202,11 @@ class MinHeap {
     );
 
     this.printHorizontalTree(parentIdx * 2, spaceCnt);
+  }
+
+  printArr(...appendedMsgs) {
+    const arrStr = `\n[${["null", ...this.heap.slice(1)].join(", ")}]`;
+    const msgLen = arrStr.length + appendedMsgs.toString().length;
+    console.log("-".repeat(msgLen), arrStr, ...appendedMsgs);
   }
 }
