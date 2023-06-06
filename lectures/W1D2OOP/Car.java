@@ -5,6 +5,7 @@ public class Car {
     private String model;
     private String color;
     private int numberOfWheels;
+    private String vinNumber;
 
     private static int numberOfCars = 0;
 
@@ -18,31 +19,32 @@ public class Car {
         numberOfCars++;
     }
 
-    // public Car(int year, String make, String model, String color) {
-    //     this.year = year;
-    //     this.make = make;
-    //     this.model = model;
-    //     this.color = color;
-    //     // this.numberOfWheels = 4;
-    // }
-
-    public Car(int yearParam, String makeParam, String modelParam,
-               String colorParam) {
-        year = yearParam;
-        make = makeParam;
-        model = modelParam;
-        color = colorParam;
-        numberOfWheels = 4;
-        numberOfCars++;
+    public Car(int year, String make, String model, String color) {
+        this.year = year;
+        this.make = make;
+        this.model = model;
+        this.color = color;
+        this.numberOfWheels = 4;
     }
 
+    // public Car(int yearParam, String makeParam, String modelParam,
+    //            String colorParam) {
+    //     year = yearParam;
+    //     make = makeParam;
+    //     model = modelParam;
+    //     color = colorParam;
+    //     numberOfWheels = 4;
+    //     numberOfCars++;
+    // }
+
     public Car(int year, String make, String model, String color,
-               int numberOfWheels) {
+               int numberOfWheels, String vinNumber) {
         this.year = year;
         this.make = make;
         this.model = model;
         this.color = color;
         this.numberOfWheels = numberOfWheels;
+        this.vinNumber = vinNumber;
         numberOfCars++;
     }
 
@@ -50,6 +52,11 @@ public class Car {
 
     public int getYear() { return this.year; }
     public void setYear(int newYear) { this.year = newYear; }
+
+    public int year(int newYear) {
+        this.year = newYear;
+        return this.year;
+    }
 
     public String getMake() { return this.make; }
     public void setMake(String make) { this.make = make; }
@@ -69,4 +76,9 @@ public class Car {
     public int getNumberOfWheels() { return this.numberOfWheels; }
 
     public static int getNumberOfCars() { return numberOfCars; }
+
+
+    public String getVinNumber() {
+        return this.vinNumber;
+    }
 }

@@ -6,7 +6,7 @@ public class CarTest {
         Car car3 = new Car(2024, "Toyota", "Supra", "yellow");
         Car car4 = new Car(2024, "Toyota", "Supra", "yellow");
         Car car5 = new Car(2024, "Toyota", "Supra", "yellow");
-        Car car6 = new Car(2024, "Toyota", "Supra", "yellow");
+        Car car6 = new Car(2024, "Toyota", "Supra", "yellow", 4, "12356");
 
         // car1.year = 1977;
         // car1.make = "Toyota";
@@ -31,5 +31,7 @@ public class CarTest {
         System.out.println(car2.getNumberOfWheels());
 
         System.out.println(Car.getNumberOfCars());
+
+        System.out.println(car6.getVinNumber());
     }
 }
