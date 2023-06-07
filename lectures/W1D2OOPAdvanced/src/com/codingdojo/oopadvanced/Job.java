@@ -1,10 +1,8 @@
 package com.codingdojo.oopadvanced;
 
-public class Job {
+public abstract class Job {
 	// MEMBER VARIABLES
 	// these variables are declared NOT initialized
-	
-	// 
 	protected int strength;
 	protected int dexterity;
 	protected int intelligence;
@@ -23,15 +21,20 @@ public class Job {
 	// method syntax
 	// accessModifier returnDataType funcName(param1, param2...){}
 	// void means we will not have a return statement
-	public void attack(Job target) {
-		int newHealth = target.getHealth() - this.strength;
-		
-		target.setHealth(newHealth);
-	}
+	// implemented versions when Job is not abstract
+//	public void attack(Job target) {
+//		int newHealth = target.getHealth() - this.strength;
+//		
+//		target.setHealth(newHealth);
+//	}
+//	
+//	public void rest() {
+//		this.health += 10;
+//	}
 	
-	public void rest() {
-		this.health += 10;
-	}
+	// abstract versions
+	public abstract void attack(Job target);
+	public abstract void rest();
 	
 	// GETTERS AND SETTERS
 

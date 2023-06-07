@@ -28,10 +28,8 @@ public class Test {
 		
 		Paladin tim = new Paladin();
 		Paladin will = new Paladin();
-		Job job1 = new Job();
 		
 		System.out.println("Health of Paladin object: " + will.getHealth());
-		System.out.println("Health of Job object: " + job1.getHealth());
 		System.out.println(tim.getFaith());
 		
 		tim.attack(will);

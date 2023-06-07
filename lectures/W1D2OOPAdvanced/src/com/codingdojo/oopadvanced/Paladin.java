@@ -2,7 +2,7 @@ package com.codingdojo.oopadvanced;
 
 
 // INHERITANCE
-public class Paladin extends Job {
+public class Paladin extends Job implements JobAbilities {
 	private int faith;
 	
 	// CONSTRUCTOR
@@ -22,11 +22,18 @@ public class Paladin extends Job {
 	// attack comes from job
 	// Polymorphism allows us to overwrite and change methods
 	// from the parent
+	@Override
 	public void attack(Job target) {
 		int newHealth = target.getHealth() - (this.strength + this.faith);
 		
 		target.setHealth(newHealth);
 	}
+	
+	@Override
+	public void rest() {
+		this.health += 15;
+	}
+	
 
 	public int getFaith() {
 		return faith;
@@ -34,6 +41,16 @@ public class Paladin extends Job {
 
 	public void setFaith(int faith) {
 		this.faith = faith;
+	}
+
+	@Override
+	public void warcry() {
+		System.out.println("Stand Together!");
+	}
+
+	@Override
+	public void catchphrase() {
+		System.out.println("Nobody expects the Spanish Inquisition!");
 	}
 
 }
