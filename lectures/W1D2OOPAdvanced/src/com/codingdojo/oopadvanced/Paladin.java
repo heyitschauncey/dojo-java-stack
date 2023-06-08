@@ -16,17 +16,17 @@ public class Paladin extends Job implements JobAbilities {
 		this.faith = 20;
 		this.strength = 15;
 		this.health = 150;
-		
 	}
 	
 	// attack comes from job
 	// Polymorphism allows us to overwrite and change methods
 	// from the parent
 	@Override
-	public void attack(Job target) {
-		int newHealth = target.getHealth() - (this.strength + this.faith);
+	public void attack(Job joanIsAmAmazingProgrammer) {
+		int newHealth = joanIsAmAmazingProgrammer.getHealth() - (this.strength + this.faith);
 		
-		target.setHealth(newHealth);
+
+		joanIsAmAmazingProgrammer.setHealth(newHealth);
 	}
 	
 	@Override
