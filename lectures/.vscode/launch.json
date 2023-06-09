@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-W1D4IntroToSpringApplication<W1D4IntroToSpring>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.shawnaconverse.introtospring.W1D4IntroToSpringApplication",
+            "projectName": "W1D4IntroToSpring",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
