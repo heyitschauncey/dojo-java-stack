@@ -82,7 +82,8 @@ public class MovieController {
 	// very important this path variable is specifically called id
 	// spring does some behind the scenes if it is called id that we want
 	@PutMapping("/movies/{id}")
-	public String updateMovie(@Valid @ModelAttribute("movieToEdit") Movie movie, BindingResult result, Model model) {
+	public String updateMovie(@Valid @ModelAttribute("movieToEdit") Movie movie, 
+			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("movieToEdit", movie);
 			
