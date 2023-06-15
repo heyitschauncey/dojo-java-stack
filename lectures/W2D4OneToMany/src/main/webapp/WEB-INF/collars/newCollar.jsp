@@ -19,39 +19,33 @@
     <link rel="stylesheet" href="/css/style.css"/>
     <title>Dog Emporium</title>
 </head>
-<body class="p-3">
+<body>
 	<header class="d-flex justify-content-between align-items-center border-bottom">
 		<h1>Dog Emporium</h1>
-		<a href="/">Dashboard</a>	
+		<a href="/dogs">Dashboard</a>	
 	</header>
 	
-	<h3><c:out value="${ oneDog.name }" /></h3> 
-	<p><c:out value="${ oneDog.age }" /></p> 
-	<p><c:out value="${ oneDog.hairColor }" /></p> 
+	<h2>Add a new collar for a dog!</h2>	
+	<form:form action="/collars" method="post" modelAttribute="newCollar" class="form">
+		<p>
+			<form:select path="dog">
+				<c:forEach var="oneDog" items="${ listOfDogs }">
+					<form:option value="${ oneDog.id }" label="${ oneDog.name }" />
+				</c:forEach>
+			</form:select>
+		</p>
+		<p>
+			<form:label path="color">Color:</form:label>
+			<form:input path="color" />
+			<form:errors path="color" />
+		</p>
+		<p>
+			<form:label path="tagShape">Shape of the tag:</form:label>
+			<form:input path="tagShape" />
+			<form:errors path="tagShape" />
+		</p>
+		<button class="btn btn-outline-primary">Add a collar!</button>
+	</form:form>
 	
-	<h3>Here are this dog's collars:</h3>
-	<table class="table">
-		<thead>
-			<th>Color</th>
-			<th>Tag Shape</th>
-			<th>Actions</th>
-		</thead>
-		<tbody>
-			<c:forEach var="oneCollar" items="${ oneDog.collars }">
-				<tr>
-					<td><c:out value="${ oneCollar.color }" /></td>
-					<td><c:out value="${ oneCollar.tagShape }" /></td>
-					<td>
-						<form action="/collars/${oneCollar.id}/${ oneDog.id }" method="post">
-							<input type="hidden" name="_method" value="delete">
-							<button class='btn btn-outline-danger'>Delete</button>
-						</form>
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	<a href="/collars/new">Add a new collar to this dog</a>
 </body>
 </html>

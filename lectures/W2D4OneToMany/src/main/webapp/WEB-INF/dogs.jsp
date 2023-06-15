@@ -35,7 +35,7 @@
 				 | 
 				 <form action="/dogs/${oneDog.id}" method="post">
 					<input type="hidden" name="_method" value="delete">
-					<button class='btn btn-outline-success'>Adopted</button>
+					<button class='btn btn-outline-success'>Adopt</button>
 				</form>
 			</li>
 		</c:forEach>
