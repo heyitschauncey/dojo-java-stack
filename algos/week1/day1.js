@@ -45,7 +45,9 @@ class SinglyLinkedList {
    * Determines if this list is empty.
    * @returns {boolean}
    */
-  isEmpty() {}
+  isEmpty() {
+    return this.head === null;
+  }
 
   /**
    * Creates a new node with the given data and inserts it at the back of
@@ -53,7 +55,23 @@ class SinglyLinkedList {
    * @param {any} data The data to be added to the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtBack(data) {}
+  insertAtBack(data) {
+    const newBack = new ListNode(data);
+
+    if (this.isEmpty()) {
+      this.head = newBack;
+      return this;
+    }
+
+    let runner = this.head;
+
+    while (runner.next !== null) {
+      runner = runner.next;
+    }
+
+    runner.next = newBack;
+    return this;
+  }
 
   /**
    * Creates a new node with the given data and inserts it at the back of
@@ -63,7 +81,18 @@ class SinglyLinkedList {
    *    or null when the end of the list has been reached.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtBackRecursive(data, runner = this.head) {}
+  insertAtBackRecursive(data, runner = this.head) {
+    if (this.isEmpty()) {
+      this.head = new ListNode(data);
+      return this;
+    }
+
+    if (runner.next === null) {
+      runner.next = new ListNode(data);
+      return this;
+    }
+    return this.insertAtBackRecursive(data, runner.next);
+  }
 
   /**
    * Calls insertAtBack on each item of the given array.
@@ -103,13 +132,13 @@ class SinglyLinkedList {
   after completing it, uncomment the code.
 */
 
-// const singleNodeList = new SinglyLinkedList().insertAtBackMany([1]);
-// const biNodeList = new SinglyLinkedList().insertAtBackMany([1, 2]);
-// const firstThreeList = new SinglyLinkedList().insertAtBackMany([1, 2, 3]);
-// const secondThreeList = new SinglyLinkedList().insertAtBackMany([4, 5, 6]);
-// const unorderedList = new SinglyLinkedList().insertAtBackMany([
-//   -5, -10, 4, -3, 6, 1, -7, -2,
-// ]);
+const singleNodeList = new SinglyLinkedList().insertAtBackMany([1]);
+const biNodeList = new SinglyLinkedList().insertAtBackMany([1, 2]);
+const firstThreeList = new SinglyLinkedList().insertAtBackMany([1, 2, 3]);
+const secondThreeList = new SinglyLinkedList().insertAtBackMany([4, 5, 6]);
+const unorderedList = new SinglyLinkedList().insertAtBackMany([
+  -5, -10, 4, -3, 6, 1, -7, -2,
+]);
 
 // Print your list like so:
-// console.log(firstThreeList.toArr());
+console.log(firstThreeList.toArr());
