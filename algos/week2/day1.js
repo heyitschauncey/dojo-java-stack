@@ -48,8 +48,6 @@ class BinarySearchTree {
 
   /**
    * Retrieves the smallest integer data from this tree.
-   * - Time: O(?).
-   * - Space: O(?).
    * @param {Node} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The smallest integer from this tree.
@@ -58,8 +56,6 @@ class BinarySearchTree {
 
   /**
    * Retrieves the smallest integer data from this tree.
-   * - Time: O(?).
-   * - Space: O(?).
    * @param {Node} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The smallest integer from this tree.
@@ -68,8 +64,6 @@ class BinarySearchTree {
 
   /**
    * Retrieves the largest integer data from this tree.
-   * - Time: O(?).
-   * - Space: O(?).
    * @param {Node} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The largest integer from this tree.
@@ -78,8 +72,6 @@ class BinarySearchTree {
 
   /**
    * Retrieves the largest integer data from this tree.
-   * - Time: O(?).
-   * - Space: O(?).
    * @param {Node} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The largest integer from this tree.
@@ -96,8 +88,8 @@ class BinarySearchTree {
     this.print(node.right, spaceCnt);
 
     console.log(
-      ' '.repeat(spaceCnt < spaceIncr ? 0 : spaceCnt - spaceIncr) +
-        `${node.data}`
+      " ".repeat(spaceCnt < spaceIncr ? 0 : spaceCnt - spaceIncr) +
+        `${node.data}`,
     );
 
     this.print(node.left, spaceCnt);
@@ -134,14 +126,3 @@ threeLevelTree.root.left.left = new BSTNode(2);
 threeLevelTree.root.left.right = new BSTNode(6);
 threeLevelTree.root.right = new BSTNode(15);
 threeLevelTree.root.right.left = new BSTNode(13);
-
-/* fullTree
-                    root
-                <-- 25 -->
-              /            \
-            15             50
-          /    \         /    \
-        10     22      35     70
-      /   \   /  \    /  \   /  \
-    4    12  18  24  31  44 66  90
-*/

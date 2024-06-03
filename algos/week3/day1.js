@@ -19,8 +19,6 @@ class MinHeap {
 
   /**
    * Retrieves the top (minimum number) in the heap without removing it.
-   * - Time: O(1) constant.
-   * - Space: O(1) constant.
    * @returns {?number} Null if empty.
    */
   top() {}
@@ -30,8 +28,6 @@ class MinHeap {
    * 1. Push new num to back then.
    * 2. Iteratively swap the new num with it's parent while it is smaller than
    *    it's parent.
-   * - Time: O(log n) logarithmic due to shiftUp / iterative swapping.
-   * - Space: O(1) constant.
    * @param {number} num The num to add.
    */
   insert(num) {}
@@ -49,10 +45,21 @@ class MinHeap {
     this.printHorizontalTree(parentIdx * 2 + 1, spaceCnt);
 
     console.log(
-      ' '.repeat(spaceCnt < spaceIncr ? 0 : spaceCnt - spaceIncr) +
-        `${this.heap[parentIdx]} (${parentIdx})`
+      " ".repeat(spaceCnt < spaceIncr ? 0 : spaceCnt - spaceIncr) +
+        `${this.heap[parentIdx]} (${parentIdx})`,
     );
 
     this.printHorizontalTree(parentIdx * 2, spaceCnt);
   }
 }
+
+var heap = new MinHeap();
+heap.insert(1);
+heap.insert(11);
+heap.insert(10);
+heap.insert(19);
+heap.insert(4);
+heap.insert(3);
+heap.insert(21);
+
+heap.printHorizontalTree();
