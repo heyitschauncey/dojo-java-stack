@@ -45,7 +45,9 @@ class SinglyLinkedList {
    * Determines if this list is empty.
    * @returns {boolean}
    */
-  isEmpty() {}
+  isEmpty() {
+    return this.head === null;
+  }
 
   /**
    * Creates a new node with the given data and inserts it at the back of
@@ -53,7 +55,23 @@ class SinglyLinkedList {
    * @param {any} data The data to be added to the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtBack(data) {}
+  insertAtBack(data) {
+    const newBack = new ListNode(data);
+
+    if (this.isEmpty()) {
+      this.head = newBack;
+      return this;
+    }
+
+    let runner = this.head;
+
+    while (runner.next !== null) {
+      runner = runner.next;
+    }
+
+    runner.next = newBack;
+    return this;
+  }
 
   /**
    * Creates a new node with the given data and inserts it at the back of
@@ -63,7 +81,18 @@ class SinglyLinkedList {
    *    or null when the end of the list has been reached.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtBackRecursive(data, runner = this.head) {}
+  insertAtBackRecursive(data, runner = this.head) {
+    if (this.isEmpty()) {
+      this.head = new ListNode(data);
+      return this;
+    }
+
+    if (runner.next === null) {
+      runner.next = new ListNode(data);
+      return this;
+    }
+    return this.insertAtBackRecursive(data, runner.next);
+  }
 
   /**
    * Calls insertAtBack on each item of the given array.
