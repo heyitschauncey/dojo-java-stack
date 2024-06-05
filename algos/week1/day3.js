@@ -131,20 +131,52 @@ class SinglyLinkedList {
    * @param {any} data The data for the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtFront(data) {}
+  insertAtFront(data) {
+    const newHead = new ListNode(data);
+    newHead.next = this.head;
+    this.head = newHead;
+    return this;
+  }
 
   /**
    * Removes the first node of this list.
    * @returns {any} The data from the removed node.
    */
-  removeHead() {}
+  removeHead() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    const oldHead = this.head;
+    this.head = oldHead.next;
+    return oldHead.data;
+  }
 
   // EXTRA
   /**
    * Calculates the average of this list.
    * @returns {number|NaN} The average of the node's data.
    */
-  average() {}
+  average() {
+    let runner = this.head;
+    let sum = 0;
+    let cnt = 0;
+
+    while (runner) {
+      cnt++;
+      sum += runner.data;
+      runner = runner.next;
+    }
+
+    /**
+     * Dividing by 0 will give you NaN (Not a Number), so an empty list
+     * will return NaN in this case, it may make sense to allow NaN to be
+     * returned, because the average of an empty list doesn't make sense and
+     * it could be misleading to return 0 since 0 is the average of any
+     * list with a sum of 0 (due to negatives or all zeros).
+     */
+    return sum / cnt;
+  }
 
   // ==========================================================================
   // NEW PROBLEMS =============================================================
