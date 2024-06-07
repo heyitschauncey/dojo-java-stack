@@ -238,6 +238,7 @@ class SinglyLinkedList {
     }
     return this.containsRecursive(val, current.next);
   }
+
   // EXTRA
   /**
    * Recursively finds the maximum integer data of the nodes in this list.

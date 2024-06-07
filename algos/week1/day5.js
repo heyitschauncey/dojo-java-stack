@@ -131,33 +131,87 @@ class SinglyLinkedList {
    * @param {any} data The data for the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtFront(data) {}
+  insertAtFront(data) {
+    const newHead = new ListNode(data);
+    newHead.next = this.head;
+    this.head = newHead;
+    return this;
+  }
 
   /**
    * Removes the first node of this list.
    * @returns {any} The data from the removed node.
    */
-  removeHead() {}
+  removeHead() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    const oldHead = this.head;
+    this.head = oldHead.next;
+    return oldHead.data;
+  }
 
   // EXTRA
   /**
    * Calculates the average of this list.
    * @returns {number|NaN} The average of the node's data.
    */
-  average() {}
+  average() {
+    let runner = this.head;
+    let sum = 0;
+    let cnt = 0;
+
+    while (runner) {
+      cnt++;
+      sum += runner.data;
+      runner = runner.next;
+    }
+  }
 
   /**
    * Removes the last node of this list.
    * @returns {any} The data from the node that was removed.
    */
-  removeBack() {}
+  removeBack() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    // Only 1 node.
+    if (this.head.next === null) {
+      return this.removeHead();
+    }
+
+    // More than 1 node.
+    let runner = this.head;
+
+    while (runner.next.next) {
+      runner = runner.next;
+    }
+
+    // after while loop finishes, runner is now at 2nd to last node
+    const removedData = runner.next.data;
+    runner.next = null; // remove it from list
+    return removedData;
+  }
 
   /**
    * Determines whether or not the given search value exists in this list.
    * @param {any} val The data to search for in the nodes of this list.
    * @returns {boolean}
    */
-  contains(val) {}
+  contains(val) {
+    let runner = this.head;
+
+    while (runner) {
+      if (runner.data === val) {
+        return true;
+      }
+      runner = runner.next;
+    }
+    return false;
+  }
 
   /**
    * Determines whether or not the given search value exists in this list.
@@ -166,7 +220,15 @@ class SinglyLinkedList {
    *    or null when the end of the list has been reached.
    * @returns {boolean}
    */
-  containsRecursive(val, current = this.head) {}
+  containsRecursive(val, current = this.head) {
+    if (current === null) {
+      return false;
+    }
+    if (current.data === val) {
+      return true;
+    }
+    return this.containsRecursive(val, current.next);
+  }
 
   // EXTRA
   /**
@@ -177,6 +239,21 @@ class SinglyLinkedList {
    *    max integer as it's data.
    * @returns {?number} The max int or null if none.
    */
+  recursiveMax(runner = this.head, maxNode = this.head) {
+    if (this.head === null) {
+      return null;
+    }
+
+    if (runner === null) {
+      return maxNode.data;
+    }
+
+    if (runner.data > maxNode.data) {
+      maxNode = runner;
+    }
+
+    return this.recursiveMax(runner.next, maxNode);
+  }
   recursiveMax(runner = this.head, maxNode = this.head) {}
 
   /**
@@ -184,6 +261,19 @@ class SinglyLinkedList {
    * @returns {any} The data of the second to last node or null if there is no
    *    second to last node.
    */
+  secondToLast() {
+    if (!this.head || !this.head.next) {
+      return null;
+    }
+
+    // There are at least 2 nodes since the above return hasn't happened.
+    let runner = this.head;
+
+    while (runner.next.next) {
+      runner = runner.next;
+    }
+    return runner.data;
+  }
   secondToLast() {}
 
   /**
@@ -192,6 +282,27 @@ class SinglyLinkedList {
    *    node to be removed.
    * @returns {boolean} Indicates if a node was removed or not.
    */
+  removeVal(val) {
+    if (this.isEmpty()) {
+      return false;
+    }
+
+    if (this.head.data === val) {
+      this.removeHead();
+      return true;
+    }
+
+    let runner = this.head;
+
+    while (runner.next) {
+      if (runner.next.data === val) {
+        runner.next = runner.next.next;
+        return true;
+      }
+      runner = runner.next;
+    }
+    return false;
+  }
   removeVal(val) {}
 
   // EXTRA
@@ -202,6 +313,34 @@ class SinglyLinkedList {
    *    should be inserted in front of.
    * @returns {boolean} To indicate whether the node was pre-pended or not.
    */
+  prepend(newVal, targetVal) {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    if (this.head.data === targetVal) {
+      this.insertAtFront(newVal);
+      return this.head;
+    }
+
+    // we already know we're not going to need to prepend before the head
+    let runner = this.head;
+
+    while (runner) {
+      // End of list and not found.
+      if (runner.next === null) {
+        return null;
+      }
+
+      if (runner.next.data === targetVal) {
+        const prependNode = new ListNode(newVal);
+        prependNode.next = runner.next;
+        runner.next = prependNode;
+        return prependNode;
+      }
+      runner = runner.next;
+    }
+  }
   prepend(newVal, targetVal) {}
 
   // ==========================================================================
