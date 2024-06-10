@@ -40,43 +40,79 @@ class BinarySearchTree {
 
   /**
    * Determines if this tree is empty.
-   * - Time: O(?).
-   * - Space: O(?).
    * @returns {boolean} Indicates if this tree is empty.
    */
-  isEmpty() {}
+  isEmpty() {
+    return this.root === null;
+  }
 
   /**
    * Retrieves the smallest integer data from this tree.
-   * @param {Node} current The node that is currently accessed from the tree as
+   * @param {BSTNode} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The smallest integer from this tree.
    */
-  min(current = this.root) {}
+  min(current = this.root) {
+    if (current === null) {
+      return null;
+    }
+
+    while (current.left) {
+      current = current.left;
+    }
+    return current.data;
+  }
 
   /**
    * Retrieves the smallest integer data from this tree.
-   * @param {Node} current The node that is currently accessed from the tree as
+   * @param {BSTNode} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The smallest integer from this tree.
    */
-  minRecursive(current = this.root) {}
+  minRecursive(current = this.root) {
+    if (current === null) {
+      return null;
+    }
+
+    if (current.left === null) {
+      return current.data;
+    }
+    return this.minRecursive(current.left);
+  }
 
   /**
    * Retrieves the largest integer data from this tree.
-   * @param {Node} current The node that is currently accessed from the tree as
+   * @param {BSTNode} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The largest integer from this tree.
    */
-  max(current = this.root) {}
+  max(current = this.root) {
+    if (current === null) {
+      return null;
+    }
+
+    while (current.right) {
+      current = current.right;
+    }
+    return current.data;
+  }
 
   /**
    * Retrieves the largest integer data from this tree.
-   * @param {Node} current The node that is currently accessed from the tree as
+   * @param {BSTNode} current The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {number} The largest integer from this tree.
    */
-  maxRecursive(current = this.root) {}
+  maxRecursive(current = this.root) {
+    if (current === null) {
+      return null;
+    }
+
+    if (current.right === null) {
+      return current.data;
+    }
+    return this.maxRecursive(current.right);
+  }
 
   // Logs this tree horizontally with the root on the left.
   print(node = this.root, spaceCnt = 0, spaceIncr = 10) {
@@ -100,22 +136,58 @@ class BinarySearchTree {
    * @param {number} searchVal The number to search for in the node's data.
    * @returns {boolean} Indicates if the searchVal was found.
    */
-  contains(searchVal) {}
+  contains(searchVal) {
+    let current = this.root;
+
+    while (current) {
+      if (current.data === searchVal) {
+        return true;
+      }
+
+      if (searchVal < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+  }
 
   /**
    * Determines if this tree contains the given searchVal.
    * @param {number} searchVal The number to search for in the node's data.
    * @returns {boolean} Indicates if the searchVal was found.
    */
-  containsRecursive(searchVal, current = this.root) {}
+  containsRecursive(searchVal, current = this.root) {
+    if (current === null) {
+      return false;
+    }
+
+    if (current.data === searchVal) {
+      return true;
+    }
+
+    if (searchVal < current.data) {
+      return this.containsRecursive(searchVal, current.left);
+    }
+
+    if (searchVal > current.data) {
+      return this.containsRecursive(searchVal, current.right);
+    }
+  }
 
   /**
    * Calculates the range (max - min) from the given startNode.
-   * @param {Node} startNode The node to start from to calculate the range.
+   * @param {BSTNode} startNode The node to start from to calculate the range.
    * @returns {number|null} The range of this tree or a sub tree depending on if the
    *    startNode is the root or not.
    */
-  range(startNode = this.root) {}
+  range(startNode = this.root) {
+    if (!startNode) {
+      return null;
+    }
+    return this.max(startNode) - this.min(startNode);
+  }
 
   /**
    * Inserts a new node with the given newVal in the right place to preserver
@@ -123,17 +195,64 @@ class BinarySearchTree {
    * @param {number} newVal The data to be added to a new node.
    * @returns {BinarySearchTree} This tree.
    */
-  insert(newVal) {}
+  insert(newVal) {
+    const node = new BSTNode(newVal);
+
+    if (this.isEmpty()) {
+      this.root = node;
+      return this;
+    }
+
+    let current = this.root;
+
+    while (true) {
+      if (newVal <= current.data) {
+        if (current.left === null) {
+          current.left = node;
+          return this;
+        }
+
+        current = current.left;
+      } else {
+        // newVal is greater than current.data
+        if (current.right === null) {
+          current.right = node;
+          return this;
+        }
+
+        current = current.right;
+      }
+    }
+  }
 
   /**
    * Inserts a new node with the given newVal in the right place to preserver
    * the order of this tree.
    * @param {number} newVal The data to be added to a new node.
-   * @param {Node} curr The node that is currently accessed from the tree as
+   * @param {BSTNode} curr The node that is currently accessed from the tree as
    *    the tree is being traversed.
    * @returns {BinarySearchTree} This tree.
    */
-  insertRecursive(newVal, curr = this.root) {}
+  insertRecursive(newVal, curr = this.root) {
+    if (this.isEmpty()) {
+      this.root = new BSTNode(newVal);
+      return this;
+    }
+
+    if (newVal > curr.data) {
+      if (curr.right === null) {
+        curr.right = new BSTNode(newVal);
+        return this;
+      }
+      return this.insertRecursive(newVal, curr.right);
+    }
+
+    if (curr.left === null) {
+      curr.left = new BSTNode(newVal);
+      return this;
+    }
+    return this.insertRecursive(newVal, curr.left);
+  }
 
   // ==========================================================================
   // NEW PROBLEMS =============================================================
