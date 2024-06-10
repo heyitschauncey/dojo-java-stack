@@ -40,11 +40,11 @@ class BinarySearchTree {
 
   /**
    * Determines if this tree is empty.
-   * - Time: O(?).
-   * - Space: O(?).
    * @returns {boolean} Indicates if this tree is empty.
    */
-  isEmpty() {}
+  isEmpty() {
+    return this.root === null;
+  }
 
   /**
    * Retrieves the smallest integer data from this tree.
@@ -89,7 +89,7 @@ class BinarySearchTree {
 
     console.log(
       " ".repeat(spaceCnt < spaceIncr ? 0 : spaceCnt - spaceIncr) +
-        `${node.data}`,
+        `${node.data}`
     );
 
     this.print(node.left, spaceCnt);
