@@ -44,21 +44,77 @@ class DoublyLinkedList {
    * @param {any} data The data for the new node.
    * @returns {DoublyLinkedList} This list.
    */
-  insertAtFront(data) {}
+  insertAtFront(data) {
+    const newHead = new DLLNode(data);
+
+    if (this.isEmpty()) {
+      this.head = newHead;
+      this.tail = newHead;
+    } else {
+      const oldHead = this.head;
+      oldHead.prev = newHead;
+      newHead.next = oldHead;
+      this.head = newHead;
+    }
+    return this;
+  }
 
   /**
    * Creates a new node and adds it at the back of this list.
    * @param {any} data The data for the new node.
    * @returns {DoublyLinkedList} This list.
    */
-  insertAtBack(data) {}
+  insertAtBack(data) {
+    const newTail = new DLLNode(data);
+
+    if (this.isEmpty()) {
+      // if no head set the newTail to be both the head and the tail
+      this.head = newTail;
+      this.tail = newTail;
+    } else {
+      this.tail.next = newTail;
+      newTail.prev = this.tail;
+
+      this.tail = newTail;
+    }
+    return this;
+  }
 
   // EXTRA
   /**
    * Removes the middle node in this list.
    * @returns {any} The data of the removed node.
    */
-  removeMiddleNode() {}
+  removeMiddleNode() {
+    // when there is only 1 node, it is the middle, remove it.
+    if (!this.isEmpty() && this.head === this.tail) {
+      const removedData = this.head.data;
+      this.head = null;
+      this.tail = null;
+      return removedData;
+    }
+
+    let forwardRunner = this.head;
+    let backwardsRunner = this.tail;
+
+    while (forwardRunner && backwardsRunner) {
+      if (forwardRunner === backwardsRunner) {
+        const midNode = forwardRunner;
+        midNode.prev.next = midNode.next;
+        midNode.next.prev = midNode.prev;
+        return midNode.data;
+      }
+
+      // runners passed each other without stopping on the same node, even length, we can exit early
+      if (forwardRunner.prev === backwardsRunner) {
+        return null;
+      }
+
+      forwardRunner = forwardRunner.next;
+      backwardsRunner = backwardsRunner.prev;
+    }
+    return null;
+  }
 
   /**
    * Determines if this list is empty.

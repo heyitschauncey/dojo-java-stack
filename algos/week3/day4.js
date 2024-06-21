@@ -44,14 +44,41 @@ class DoublyLinkedList {
    * @param {any} data The data for the new node.
    * @returns {DoublyLinkedList} This list.
    */
-  insertAtFront(data) {}
+  insertAtFront(data) {
+    const newNode = new DLLNode(data);
+
+    if (this.isEmpty()) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    return this;
+  }
 
   /**
    * Creates a new node and adds it at the back of this list.
    * @param {any} data The data for the new node.
    * @returns {DoublyLinkedList} This list.
    */
-  insertAtBack(data) {}
+  insertAtBack(data) {
+    const newNode = new DLLNode(data);
+
+    if (this.isEmpty()) {
+      this.head = newNode;
+      this.tail = newNode;
+    }
+    {
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
+    }
+
+    return this;
+  }
 
   // EXTRA
   /**
