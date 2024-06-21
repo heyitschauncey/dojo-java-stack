@@ -162,7 +162,34 @@ class DoublyLinkedList {
    * @param {any} newVal Data for the new node.
    * @returns {boolean} Indicates if the new node was added.
    */
-  insertAfter(targetVal, newVal) {}
+  insertAfter(targetVal, newVal) {
+    if (this.isEmpty()) return false;
+
+    let runner = this.head;
+
+    while (runner !== null && runner.data !== targetVal) {
+      runner = runner.next;
+    }
+
+    if (runner === null) return false;
+
+    // as of this point
+    // if runner has a node, we have then found the target val
+    const newNode = new DLLNode(newVal);
+
+    newNode.prev = runner;
+    newNode.next = runner.next;
+
+    if (runner === this.tail) {
+      this.tail = newNode;
+    } else {
+      runner.next.prev = newNode;
+    }
+
+    runner.next = newNode;
+
+    return true;
+  }
 
   /**
    * Inserts a new node with the given newVal before the node that has the
@@ -171,7 +198,33 @@ class DoublyLinkedList {
    * @param {any} newVal Data for the new node.
    * @returns {boolean} Indicates if the new node was added.
    */
-  insertBefore(targetVal, newVal) {}
+  insertBefore(targetVal, newVal) {
+    if (this.isEmpty()) return false;
+
+    let runner = this.head;
+
+    while (runner) {
+      if (runner.data === targetVal) {
+        const newNode = new DLLNode(newVal);
+        newNode.next = runner;
+        newNode.prev = runner.prev;
+
+        if (runner === this.head) {
+          this.head = newNode;
+        } else {
+          runner.prev.next = newNode;
+        }
+
+        runner.prev = newNode;
+
+        return true;
+      }
+
+      runner = runner.next;
+    }
+
+    return false;
+  }
 }
 
 const emptyList = new DoublyLinkedList();
