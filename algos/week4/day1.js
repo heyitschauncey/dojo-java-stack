@@ -20,7 +20,7 @@ class Stack {
    * @returns {number} The new length of this stack.
    */
   push(item) {
-    this.items.puch(item);
+    this.items.push(item);
     return this.size();
   }
 
