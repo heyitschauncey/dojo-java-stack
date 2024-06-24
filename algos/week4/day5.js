@@ -28,27 +28,27 @@ const incomingOrders1 = [
   {
     price: 155,
     quantity: 3,
-    action: 'buy',
+    action: "buy",
   },
   {
     price: 100,
     quantity: 5,
-    action: 'sell',
+    action: "sell",
   },
   {
     price: 125,
     quantity: 3,
-    action: 'buy',
+    action: "buy",
   },
   {
     price: 90,
     quantity: 2,
-    action: 'buy',
+    action: "buy",
   },
   {
     price: 110,
     quantity: 4,
-    action: 'sell',
+    action: "sell",
   },
 ];
 
@@ -79,17 +79,17 @@ const incomingOrders2 = [
   {
     price: 80,
     quantity: 6,
-    action: 'buy',
+    action: "buy",
   },
   {
     price: 120,
     quantity: 4,
-    action: 'sell',
+    action: "sell",
   },
   {
     price: 80,
     quantity: 8,
-    action: 'sell',
+    action: "sell",
   },
 ];
 

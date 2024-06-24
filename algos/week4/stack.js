@@ -73,7 +73,7 @@ class Stack {
    * @returns {string} The same string that is logged.
    */
   print() {
-    const str = this.items.join(' ');
+    const str = this.items.join(" ");
     console.log(str);
     return str;
   }

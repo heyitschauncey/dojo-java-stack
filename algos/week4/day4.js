@@ -7,22 +7,47 @@ class Queue {
   constructor() {
     this.items = [];
   }
-
-  // Day 3 ====================================================================
+  /**
+   * Adds a new given item to the back of this queue.
+   * @param {any} item The new item to add to the back.
+   * @returns {number} The new size of this queue.
+   */
+  enqueue(item) {
+    this.items.push(item);
+    return this.size();
+  }
 
   /**
-   * Determines whether the sum of the left half of the queue items is equal to
-   * the sum of the right half. Avoid indexing the queue items directly via
-   * bracket notation, use the queue methods instead for practice.
-   * Use no extra array or objects.
-   * The queue should be returned to it's original order when done.
-   * - Time: O(?).
-   * - Space: O(?).
-   * @returns {boolean} Whether the sum of the left and right halves is equal.
+   * Removes and returns the first item of this queue.
+   * @returns {any} The first item or undefined if empty.
    */
-  isSumOfHalvesEqual() {}
+  dequeue() {
+    return this.items.shift();
+  }
 
-  // Day 2 ====================================================================
+  /**
+   * Retrieves the first item without removing it.
+   * @returns {any} The first item or undefined if empty.
+   */
+  front() {
+    return this.items[0];
+  }
+
+  /**
+   * Returns whether or not this queue is empty.
+   * @returns {boolean}
+   */
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  /**
+   * Retrieves the size of this queue.
+   * @returns {number} The length.
+   */
+  size() {
+    return this.items.length;
+  }
 
   /**
    * Compares this queue to another given queue to see if they are equal.
@@ -30,9 +55,6 @@ class Queue {
    * queue methods instead for practice.
    * Use no extra array or objects.
    * The queues should be returned to their original order when done.
-   * - Time: O(n^2) quadratic, n = queue length. Quadratic due to dequeue on an
-   *     array queue being O(n).
-   * - Space: O(1) constant.
    * @param {Queue} q2 The queue to be compared against this queue.
    * @returns {boolean} Whether all the items of the two queues are equal and
    *    in the same order.
@@ -66,9 +88,6 @@ class Queue {
    * queue methods for practice.
    * Use only 1 stack as additional storage, no other arrays or objects.
    * The queue should be returned to its original order when done.
-   * - Time: O(n^2) quadratic, n = queue length. Quadratic due to dequeue on an
-   *     array queue being O(n).
-   * - Space: O(n) from the stack being used to store the items again.
    * @returns {boolean}
    */
   isPalindrome() {
@@ -97,91 +116,19 @@ class Queue {
     return isPalin;
   }
 
-  // Day 1 ====================================================================
-  /**
-   * Adds a new given item to the back of this queue.
-   * - Time: O(1) constant.
-   * - Space: O(1) constant.
-   * @param {any} item The new item to add to the back.
-   * @returns {number} The new size of this queue.
-   */
-  enqueue(item) {
-    this.items.push(item);
-    return this.size();
-  }
+  // ==========================================================================
+  // NEW PROBLEMS =============================================================
+  // ==========================================================================
 
   /**
-   * Removes and returns the first item of this queue.
-   * - Time: O(n) linear, due to having to shift all the remaining items to
-   *    the left after removing first elem.
-   * - Space: O(1) constant.
-   * @returns {any} The first item or undefined if empty.
-   */
-  dequeue() {
-    return this.items.shift();
-  }
-
-  /**
-   * Retrieves the first item without removing it.
-   * - Time: O(1) constant.
-   * - Space: O(1) constant.
-   * @returns {any} The first item or undefined if empty.
-   */
-  front() {
-    return this.items[0];
-  }
-
-  /**
-   * Returns whether or not this queue is empty.
-   * - Time: O(1) constant.
-   * - Space: O(1) constant.
-   * @returns {boolean}
-   */
-  isEmpty() {
-    return this.items.length === 0;
-  }
-
-  /**
-   * Retrieves the size of this queue.
-   * - Time: O(1) constant.
-   * - Space: O(1) constant.
-   * @returns {number} The length.
-   */
-  size() {
-    return this.items.length;
-  }
-}
-
-// Day 3 ====================================================================
-
-// Import our stack data structure to use in this file.
-const Stack = require('./stack');
-
-/**
- * Class to represent a Queue but is implemented using two stacks to store the
- * queued items without using any other objects or arrays to store the items.
- * Retains the FIFO (First in First Out) ordering when adding / removing items.
- */
-class TwoStackQueue {
-  constructor() {
-    this.stack1 = new Stack();
-    this.stack2 = new Stack();
-  }
-
-  /**
-   * Adds a new item to the back of the queue.
+   * Determines whether the sum of the left half of the queue items is equal to
+   * the sum of the right half. Avoid indexing the queue items directly via
+   * bracket notation, use the queue methods instead for practice.
+   * Use no extra array or objects.
+   * The queue should be returned to it's original order when done.
    * - Time: O(?).
    * - Space: O(?).
-   * @param {any} item To be added.
-   * @returns {number} The new number of items in the queue.
+   * @returns {boolean} Whether the sum of the left and right halves is equal.
    */
-  enqueue(item) {}
-
-  /**
-   * Removes the next item in the line / queue.
-   * - Time: O(?).
-   * - Space: O(?).
-   * @returns {any} The removed item.
-   */
-  dequeue() {}
+  isSumOfHalvesEqual() {}
 }

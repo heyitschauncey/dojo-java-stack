@@ -10,9 +10,9 @@ const ascending = [20, 10, 50, 30, 0, 40].sort((a, b) => a - b);
 const descending = [20, 10, 50, 30, 0, 40].sort((a, b) => b - a);
 
 const ascendingAgePeople = [
-  { name: 'three', age: 30 },
-  { name: 'one', age: 10 },
-  { name: 'two', age: 20 },
+  { name: "three", age: 30 },
+  { name: "one", age: 10 },
+  { name: "two", age: 20 },
 ].sort((a, b) => a.age - b.age);
 
 /*
@@ -319,7 +319,7 @@ const heapOfScores = new BinaryHeap();
 /** @type {BinaryHeap<Person>} */
 /* youngest first: */
 const heapOfPeople = new BinaryHeap(
-  (personA, personB) => personA.age - personB.age
+  (personA, personB) => personA.age - personB.age,
 );
 
 /* oldest first: */

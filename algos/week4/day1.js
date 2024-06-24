@@ -74,7 +74,7 @@ class LinkedListStack {
   /**
    * Adds a new given item to the top / back of this stack.
    * @param {any} item The new item to be added to the top / back.
-   * @returns {number} The new length of this stack.
+   * @returns {void}
    */
   push(item) {}
 
