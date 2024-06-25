@@ -76,29 +76,59 @@ class LinkedListStack {
    * @param {any} item The new item to be added to the top / back.
    * @returns {void}
    */
-  push(item) {}
+  push(item) {
+    const newNode = new StackNode(item);
+
+    if (this.head === null) {
+      this.head = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+  }
 
   /**
    * Removes the top / last item from this stack.
    * @returns {any} The removed item or undefined if this stack was empty.
    */
-  pop() {}
+  pop() {
+    if (this.head === null) return null;
+
+    const removed = this.head;
+    this.head = this.head.next;
+
+    return removed.data;
+  }
 
   /**
    * Retrieves the top / last item from this stack without removing it.
    * @returns {any} The top / last item of this stack.
    */
-  peek() {}
+  peek() {
+    return this.head === null ? this.head.data : null;
+  }
 
   /**
    * Returns whether or not this stack is empty.
    * @returns {boolean}
    */
-  isEmpty() {}
+  isEmpty() {
+    return this.head === null;
+  }
 
   /**
    * Returns the size of this stack.
    * @returns {number} The length.
    */
-  size() {}
+  size() {
+    let len = 0;
+    let runner = this.head;
+
+    while (runner) {
+      len += 1;
+      runner = runner.next;
+    }
+
+    return len;
+  }
 }

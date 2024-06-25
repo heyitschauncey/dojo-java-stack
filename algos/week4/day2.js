@@ -70,29 +70,58 @@ class LinkedListQueue {
    * @param {any} item The new item to add to the back.
    * @returns {number} The new size of this queue.
    */
-  enqueue(item) {}
+  enqueue(item) {
+    const newTail = new QueueNode(item);
+
+    if (this.isEmpty()) {
+      this.head = newTail;
+      this.tail = newTail;
+    } else {
+      this.tail.next = newTail;
+      this.tail = newTail;
+    }
+
+    // depending on where you put the ++, it pre increments or post increments
+    return ++this.size;
+  }
 
   /**
    * Removes and returns the first item of this queue.
    * @returns {any} The first item or undefined if empty.
    */
-  dequeue() {}
+  dequeue() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    const removedNode = this.head;
+    this.head = this.head.next;
+
+    this.size--;
+    return removedNode.data;
+  }
 
   /**
    * Retrieves the first item without removing it.
    * @returns {any} The first item or undefined if empty.
    */
-  front() {}
+  front() {
+    return this.head ? this.head.data : null;
+  }
 
   /**
    * Returns whether or not this queue is empty.
    * @returns {boolean}
    */
-  isEmpty() {}
+  isEmpty() {
+    return this.head === null;
+  }
 
   /**
    * Retrieves the size of this queue.
    * @returns {number} The length.
    */
-  size() {}
+  size() {
+    return this.size;
+  }
 }
