@@ -390,15 +390,15 @@ class SinglyLinkedList {
 
 const mySll = new SinglyLinkedList();
 
-const node1 = new Node(11);
-const node2 = new Node(22);
-const node3 = new Node(33);
-const node4 = new Node(44);
-const node5 = new Node(55);
-const node6 = new Node(66);
-const node7 = new Node(77);
-const node8 = new Node(88);
-const node9 = new Node(99);
+const node1 = new ListNode(11);
+const node2 = new ListNode(22);
+const node3 = new ListNode(33);
+const node4 = new ListNode(44);
+const node5 = new ListNode(55);
+const node6 = new ListNode(66);
+const node7 = new ListNode(77);
+const node8 = new ListNode(88);
+const node9 = new ListNode(99);
 
 mySll.insertAtBack(node1);
 mySll.insertAtBack(node2);
