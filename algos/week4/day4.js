@@ -126,9 +126,27 @@ class Queue {
    * bracket notation, use the queue methods instead for practice.
    * Use no extra array or objects.
    * The queue should be returned to it's original order when done.
-   * - Time: O(?).
-   * - Space: O(?).
    * @returns {boolean} Whether the sum of the left and right halves is equal.
    */
   isSumOfHalvesEqual() {}
 }
+
+const equalHalves = new Queue();
+const nonEqualHalves = new Queue();
+
+equalHalves.enqueue(1);
+equalHalves.enqueue(2);
+equalHalves.enqueue(3);
+equalHalves.enqueue(1);
+equalHalves.enqueue(2);
+equalHalves.enqueue(3);
+
+nonEqualHalves.enqueue(1);
+nonEqualHalves.enqueue(2);
+nonEqualHalves.enqueue(3);
+nonEqualHalves.enqueue(4);
+nonEqualHalves.enqueue(5);
+nonEqualHalves.enqueue(6);
+
+console.log(equalHalves.isSumOfHalvesEqual()); // true
+console.log(nonEqualHalves.isSumOfHalvesEqual()); // false
