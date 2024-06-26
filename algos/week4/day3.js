@@ -63,7 +63,28 @@ class Queue {
    * @returns {boolean} Whether all the items of the two queues are equal and
    *    in the same order.
    */
-  compareQueues(q2) {}
+  compareQueues(q2) {
+    if (this.size() !== q2.size()) return false;
+
+    let count = 0;
+    let isEqual = true;
+    const len = this.size();
+
+    while (count < len) {
+      const dequeued1 = this.dequeue();
+      const dequeued2 = q2.dequeue();
+
+      if (dequeued1 !== dequeued2) {
+        isEqual = false;
+      }
+
+      this.enqueue(dequeued1);
+      q2.enqueue(dequeued2);
+      count++;
+    }
+
+    return isEqual;
+  }
 
   /**
    * Determines if the queue is a palindrome (same items forward and backwards).
@@ -73,7 +94,30 @@ class Queue {
    * The queue should be returned to its original order when done.
    * @returns {boolean}
    */
-  isPalindrome() {}
+  isPalindrome() {
+    let isPalin = true;
+    const stack = new Stack();
+    const len = this.size();
+
+    for (let i = 0; i < len; i++) {
+      let dequeued = this.dequeue();
+      stack.push(dequeued);
+      this.enqueue(dequeued);
+    }
+
+    for (let i = 0; i < len; i++) {
+      let dequeued = this.dequeue();
+      let popped = stack.pop();
+
+      if (popped !== dequeued) {
+        isPalin = false;
+      }
+
+      this.enqueue(dequeued);
+    }
+
+    return isPalin;
+  }
 }
 
 // For use in isPalindrome
