@@ -128,7 +128,33 @@ class Queue {
    * The queue should be returned to it's original order when done.
    * @returns {boolean} Whether the sum of the left and right halves is equal.
    */
-  isSumOfHalvesEqual() {}
+  isSumOfHalvesEqual() {
+    const len = this.size();
+
+    if (len % 2 !== 0) {
+      return false;
+    }
+
+    const halfLen = len / 2;
+    let leftSum = 0;
+    let rightSum = 0;
+    let count = 0;
+
+    while (count < len) {
+      const d = this.dequeue();
+
+      if (count < halfLen) {
+        leftSum += d;
+      } else {
+        rightSum += d;
+      }
+
+      count++;
+      this.enqueue(d);
+    }
+
+    return leftSum === rightSum;
+  }
 }
 
 const equalHalves = new Queue();

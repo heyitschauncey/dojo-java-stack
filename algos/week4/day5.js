@@ -31,7 +31,7 @@ class SinglyLinkedList {
    * @param {any} data The data to be added to the new node.
    * @returns {SinglyLinkedList} This list.
    */
-  insertAtBack(data) {
+  insertAtBack2(data) {
     const newBack = new ListNode(data);
 
     if (this.isEmpty()) {
@@ -49,6 +49,21 @@ class SinglyLinkedList {
     return this;
   }
 
+  insertAtBack(newBack) {
+    if (this.isEmpty()) {
+      this.head = newBack;
+      return this;
+    }
+
+    let runner = this.head;
+
+    while (runner.next !== null) {
+      runner = runner.next;
+    }
+
+    runner.next = newBack;
+    return this;
+  }
   /**
    * Calls insertAtBack on each item of the given array.
    * - Time: O(n * m) n = list length, m = arr.length.
@@ -379,13 +394,64 @@ class SinglyLinkedList {
       at the moment faster runner laps slower runner, they are at the same
       place, aka same instance of a node.
     */
+    // check if the list has anything inside
+    if (!this.head || !this.head.next) return false;
+
+    let runner = this.head;
+    let fasterRunner = this.head;
+
+    // JS will evaluate true if there is a node
+    // JS will evaluate false if null
+    while (fasterRunner && fasterRunner.next) {
+      runner = runner.next;
+      fasterRunner = fasterRunner.next.next;
+
+      if (runner === fasterRunner) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
    * If the list has a loop, return the value of the node at the beginning of the loop
    * @returns {any} The value of the node where the loop starts, else null if no loop
    */
-  loopStart() {}
+  loopStart() {
+    if (!this.head || !this.head.next) return null;
+
+    let runner = this.head;
+    let fasterRunner = this.head;
+    // boolean variables
+    // generally follow a naming convention of isWord
+    let isLoop = false;
+
+    // JS will evaluate true if there is a node
+    // JS will evaluate false if null
+    while (fasterRunner && fasterRunner.next) {
+      runner = runner.next;
+      fasterRunner = fasterRunner.next.next;
+
+      if (runner === fasterRunner) {
+        isLoop = true;
+        break;
+      }
+    }
+
+    if (isLoop) {
+      runner = this.head;
+
+      while (runner !== fasterRunner) {
+        runner = runner.next;
+        fasterRunner = fasterRunner.next;
+      }
+
+      return runner.data;
+    }
+
+    return null;
+  }
 }
 
 const mySll = new SinglyLinkedList();
@@ -416,4 +482,4 @@ node9.next = node4;
 // also known as the tortoise and the hare algorithm
 // uncomment these console logs when ready to test
 // console.log(mySll.hasLoop()) // true
-// console.log(mySll.loopStart()) // 4
+// console.log(mySll.loopStart()) // 44
